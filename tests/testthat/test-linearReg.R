@@ -25,4 +25,3 @@ test_that("Model accuracy is reasonable", {
   R_squared <- summary(model)$r.squared
   expect_true(R_squared > 0.5)
 })
-

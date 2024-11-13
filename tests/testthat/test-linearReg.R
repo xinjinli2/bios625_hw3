@@ -5,23 +5,23 @@ data("iris")
 context("Linear Model Tests on Iris Dataset")
 
 test_that("fitLinearModel returns valid model output", {
-  result <- fitLinearModel(iris$Petal.Width, iris$Petal.Length)
+  result <- fitLinearModel(Petal.Length ~ Petal.Width, iris)
 
   expect_true(is.list(result))
-  expect_true("coefficients" %in% names(result))
+  expect_true("beta_hat" %in% names(result))
   expect_true("residuals" %in% names(result))
 
-  expect_true(is.numeric(result$coefficients))
-  expect_length(result$coefficients, 2)
+  expect_true(is.numeric(result$beta_hat))
+  expect_length(result$beta_hat, 2)
 })
 
 test_that("fitLinearModel handles non-numeric input gracefully", {
-  expect_error(fitLinearModel(iris$Species, iris$Petal.Length))
+  expect_error(fitLinearModel(Petal.Length ~ Species, iris))
 })
 
 test_that("Model accuracy is reasonable", {
-  model <- fitLinearModel(iris$Petal.Width, iris$Petal.Length)
+  model <- fitLinearModel(Petal.Length ~ Petal.Width, iris)
 
-  R_squared <- summary(model)$r.squared
+  R_squared <- model$R_squared
   expect_true(R_squared > 0.5)
 })

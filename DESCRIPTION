@@ -1,0 +1,19 @@
+Package: linearReg
+Type: Package
+Title: Linear Regression Analysis Tools
+Version: 0.1.0
+Author: Cindy Li
+Maintainer: Cindy Li <xinjinli@umich.edu>
+Description: This package offers a tool for conducting linear regression analysis, 
+    enabling users to fit models, summarize results, and compute key statistics including 
+    confidence intervals for coefficients, R-squared, and F-statistics. Designed to be 
+    user-friendly for both educational environments and practical data analysis tasks, 
+    linearReg provides an accessible way to perform and interpret linear regression 
+    with an emphasis on clarity and ease of use.
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.3.2
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3

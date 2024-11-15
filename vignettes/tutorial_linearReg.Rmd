@@ -1,0 +1,116 @@
+---
+title: "Tutorial for LinearReg Package"
+output: html_vignette
+vignette: >
+  %\VignetteIndexEntry{test.package tutorial}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[uft8]{inputenc}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(bench)
+library(linearReg)
+```
+
+# Function Explanations
+*For BIOSTAT625 homework 3, to fit a linear regression model, we use `fitLinearModel()` function which need two parameters input:
+1. a formula for linear regression: $Y \sim X$
+2. a dataset containing $X$ and $Y$ variables used in the above formula
+
+*To get model summary including estimtaed coefficients, standard errors, test statistics, p-values, R squared, etc, we use `model_summary()` function and pass `model` as the parameter, which is the output of `fitLinearModel()`. 
+
+*You can get various model results separately by passing `model` parameter to below functions:
+1. confidence intervals of all estimated coefficients: `getConfidenceInterval()`
+2. R squared: `getRSquared()`
+3. adjusted R squared: `getAdjustedRSquared()`
+4. F Statistic: `getFStatistic()`
+
+
+# Examples
+```{r}
+# Load the library
+library(linearReg)
+# Define the formula
+formula = Petal.Length ~ Petal.Width + Sepal.Width
+```
+
+1. Fit linear regression model using `fitLinearModel()`
+```{r}
+my_mod <- fitLinearModel(formula, iris)
+```
+
+2. Display model summary
+```{r}
+model_summary(my_mod)
+```
+
+3. Display confidence intervals
+```{r}
+getConfidenceInterval(my_mod)
+```
+
+4. Display R squared
+```{r}
+getRSquared(my_mod)
+```
+
+5. Display Adjusted R squared
+```{r}
+getAdjustedRSquared(my_mod)
+```
+
+6. Display F Statistics
+```{r}
+getFStatistic(my_mod)
+```
+# Package Efficiency
+```{r}
+# Standard lm model for comparison
+std_mod <- lm(formula, iris)
+
+# Benchmarking the performance of custom model vs standard lm
+benchmark <- bench::mark(
+  "fitLinearModel()" = {
+    my_mod <- fitLinearModel(formula, iris)
+  },
+  "lm()" = {
+    std_mod <- lm(formula, iris)
+  },
+  iterations = 100
+)
+summary(benchmark)
+
+```
+
+```{r}
+lm(formula, iris)
+```
+
+```{r}
+fitLinearModel(formula, iris)
+```
+
+
+```{r}
+# Assuming `my_confint()` is a function that you've developed
+# You need to define this function or replace it with `getConfidenceInterval()`
+benchmark_ci <- bench::mark(
+  "my_confint()" = {
+    ci_my <- getConfidenceInterval(my_mod)
+  },
+  "confint()" = {
+    ci_std <- confint(std_mod)
+  },
+  iterations = 100
+)
+summary(benchmark_ci)
+
+```
+
+
+
+
+
+
+

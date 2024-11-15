@@ -22,6 +22,21 @@
 #'
 #' @export
 fitLinearModel <- function(formula, data) {
+
+  terms <- all.vars(formula)
+
+  # Check if all variables in formula are presented in the data
+  if (!all(terms %in% names(data))) {
+    stop("Not all variables specified in the formula are present in the dataset.")
+  }
+
+  predictors <- terms[-1]
+  for (var in predictors) {
+    if (!is.numeric(data[[var]])) {
+      stop("Non-numeric data found for predictor '", var, "'. Numeric expected.")
+    }
+  }
+
   X <- model.matrix(formula, data)  # Create model matrix for predictors
   y <- data[[as.character(formula[[2]])]]  # Extract response variable based on formula
 
@@ -60,7 +75,8 @@ fitLinearModel <- function(formula, data) {
     F_statistic = F_statistic,
     p_value_F = p_value_F,
     n = nrow(X),
-    k = ncol(X)
+    k = ncol(X),
+    X = X
   ))
 }
 
@@ -111,7 +127,8 @@ model_summary <- function(model) {
     Pr...t.. = p_values,
     Signif = signif_codes
   )
-  rownames(model_summary) <- c("(Intercept)", paste0("X", 1:(k - 1)))
+  # rownames(model_summary) <- c("(Intercept)", paste0("X", 1:(k - 1)))
+  rownames(model_summary) <- colnames(model$X)
 
 
   print(model_summary)
@@ -156,11 +173,11 @@ getConfidenceInterval <- function(model, level = 0.95) {
 
 
   ci_summary <- data.frame(
-    Estimate = beta_hat,
     Lower = lower_bound,
     Upper = upper_bound
   )
-  rownames(ci_summary) <- c("(Intercept)", paste0("X", 1:(k - 1)))
+  # rownames(ci_summary) <- c("(Intercept)", paste0("X", 1:(k - 1)))
+  rownames(ci_summary) <- colnames(model$X)
 
   return(ci_summary)
 }

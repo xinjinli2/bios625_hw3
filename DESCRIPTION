@@ -4,7 +4,7 @@ Title: Linear Regression Analysis Tools
 Version: 0.1.0
 Author: Cindy Li
 Maintainer: Cindy Li <xinjinli@umich.edu>
-Description: This package offers a tool for conducting linear regression analysis,
+Description: This package provides a tool for conducting linear regression analysis,
     enabling users to fit models, summarize results, and compute key statistics including
     confidence intervals for coefficients, R-squared, and F-statistics. Designed to be
     user-friendly for both educational environments and practical data analysis tasks,

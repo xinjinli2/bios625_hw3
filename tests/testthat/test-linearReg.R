@@ -15,7 +15,7 @@ test_that("fitLinearModel returns valid model output", {
   expect_length(result$beta_hat, 2)
 })
 
-test_that("fitLinearModel handles non-numeric input gracefully", {
+test_that("fitLinearModel handles non-numeric input correctly", {
   expect_error(fitLinearModel(Petal.Length ~ Species, iris))
 })
 

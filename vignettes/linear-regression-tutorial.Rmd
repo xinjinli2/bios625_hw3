@@ -1,0 +1,57 @@
+---
+title: "linear-regression-tutorial"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{linear-regression-tutorial}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(linearReg)
+```
+
+# Function Explanations
+*For BIOSTAT625 homework 3, to fit a linear regression model, we use `fitLinearModel()` function which need two parameters input:
+1. a formula for linear regression: $Y \sim X$
+2. a dataset containing $X$ and $Y$ variables used in the above formula
+
+*To get model summary including estimtaed coefficients, standard errors, test statistics, p-values, R squared, etc, we use `model_summary()` function and pass `model` as the parameter, which is the output of `fitLinearModel()`. 
+
+*You can get various model results separately by passing `model` parameter to below functions:
+1. confidence intervals of all estimated coefficients: `getConfidenceInterval()`
+2. R squared: `getRSquared()`
+3. adjusted R squared: `getAdjustedRSquared()`
+4. F Statistic: `getFStatistic()`
+
+
+# Examples
+```{r}
+# Define the formula
+formula = Petal.Length ~ Petal.Width + Sepal.Width
+```
+
+1. Fit linear regression model using `fitLinearModel()`
+```{r}
+my_mod <- fitLinearModel(formula, iris)
+```
+
+2. Display model summary
+```{r}
+model_summary(my_mod)
+```
+
+3. Display model Confidence Intervals
+```{r}
+getConfidenceInterval(my_mod)
+```
+
+
+

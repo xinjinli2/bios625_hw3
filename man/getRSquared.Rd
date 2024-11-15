@@ -17,8 +17,8 @@ Return the R Squared value for the model
 }
 \examples{
 data(iris)
-model <- fitLinearModel(Petal.Length ~ Petal.Width + Sepal.Length, iris)
-R_squared <- getRSquared(model)
+model = fitLinearModel(Petal.Length ~ Petal.Width + Sepal.Length, iris)
+R_squared = getRSquared(model)
 print(R_squared)
 
 }

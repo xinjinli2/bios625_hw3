@@ -17,7 +17,7 @@ Return the adjusted R Squared value for the model
 }
 \examples{
 data(iris)
-model <- fitLinearModel(Petal.Length ~ Petal.Width + Sepal.Length, iris)
-adjusted_R_squared <- getAdjustedRSquared(model)
+model = fitLinearModel(Petal.Length ~ Petal.Width + Sepal.Length, iris)
+adjusted_R_squared = getAdjustedRSquared(model)
 
 }

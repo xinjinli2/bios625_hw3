@@ -19,8 +19,8 @@ Calculates the confidence intervals for the regression coefficients at the speci
 }
 \examples{
 data(iris)
-model <- fitLinearModel(Petal.Length ~ Petal.Width + Sepal.Length, iris)
-ci <- getConfidenceInterval(model)
+model = fitLinearModel(Petal.Length ~ Petal.Width + Sepal.Length, iris)
+ci = getConfidenceInterval(model)
 print(ci)
 
 }

@@ -17,8 +17,8 @@ Return the F statistics value for the model
 }
 \examples{
 data(iris)
-model <- fitLinearModel(Petal.Length ~ Petal.Width + Sepal.Length, iris)
-F_statistic <- getFStatistic(model)
+model = fitLinearModel(Petal.Length ~ Petal.Width + Sepal.Length, iris)
+F_statistic = getFStatistic(model)
 print(F_statistic)
 
 }

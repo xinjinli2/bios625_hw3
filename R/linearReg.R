@@ -12,12 +12,11 @@
 #' sigma squared, R-squared, adjusted R-squared, F-statistic, p-value of the F-statistic,
 #' number of observations, and number of predictors.
 #'
-#' @importFrom stats model.matrix
-#' @importFrom base solve
+#' @importFrom stats model.matrix pt qt pf
 #'
 #' @examples
 #' data(iris)
-#' model <- fitLinearModel(Petal.Length ~ Petal.Width + Sepal.Length, iris)
+#' model = fitLinearModel(Petal.Length ~ Petal.Width + Sepal.Length, iris)
 #' print(model)
 #'
 #' @export
@@ -93,7 +92,7 @@ fitLinearModel <- function(formula, data) {
 #'
 #' @examples
 #' data(iris)
-#' model <- fitLinearModel(Petal.Length ~ Petal.Width + Sepal.Length, iris)
+#' model = fitLinearModel(Petal.Length ~ Petal.Width + Sepal.Length, iris)
 #' model_summary(model)
 #'
 #' @export
@@ -137,7 +136,7 @@ model_summary <- function(model) {
   cat("\nResidual standard error:", sqrt(sigma_squared), "on", n - k, "degrees of freedom\n")
   cat("Multiple R-squared:", R_squared, ", Adjusted R-squared:", adjusted_R_squared, "\n")
   cat("F-statistic:", F_statistic, "on", k - 1, "and", n - k, "DF, p-value:", format.pval(p_value_F), "\n")
-  cat("Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1\n\n")
+  cat("Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n")
 }
 
 #' Confidence Interval for Model Coefficients
@@ -151,8 +150,8 @@ model_summary <- function(model) {
 #'
 #' @examples
 #' data(iris)
-#' model <- fitLinearModel(Petal.Length ~ Petal.Width + Sepal.Length, iris)
-#' ci <- getConfidenceInterval(model)
+#' model = fitLinearModel(Petal.Length ~ Petal.Width + Sepal.Length, iris)
+#' ci = getConfidenceInterval(model)
 #' print(ci)
 #'
 #' @export
@@ -190,8 +189,8 @@ getConfidenceInterval <- function(model, level = 0.95) {
 #'
 #' @examples
 #' data(iris)
-#' model <- fitLinearModel(Petal.Length ~ Petal.Width + Sepal.Length, iris)
-#' R_squared <- getRSquared(model)
+#' model = fitLinearModel(Petal.Length ~ Petal.Width + Sepal.Length, iris)
+#' R_squared = getRSquared(model)
 #' print(R_squared)
 #'
 #' @export
@@ -207,8 +206,8 @@ getRSquared <- function(model) {
 #'
 #' @examples
 #' data(iris)
-#' model <- fitLinearModel(Petal.Length ~ Petal.Width + Sepal.Length, iris)
-#' adjusted_R_squared <- getAdjustedRSquared(model)
+#' model = fitLinearModel(Petal.Length ~ Petal.Width + Sepal.Length, iris)
+#' adjusted_R_squared = getAdjustedRSquared(model)
 #'
 #' @export
 getAdjustedRSquared <- function(model) {
@@ -224,8 +223,8 @@ getAdjustedRSquared <- function(model) {
 #'
 #' @examples
 #' data(iris)
-#' model <- fitLinearModel(Petal.Length ~ Petal.Width + Sepal.Length, iris)
-#' F_statistic <- getFStatistic(model)
+#' model = fitLinearModel(Petal.Length ~ Petal.Width + Sepal.Length, iris)
+#' F_statistic = getFStatistic(model)
 #' print(F_statistic)
 #'
 #' @export

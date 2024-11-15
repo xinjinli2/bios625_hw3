@@ -24,7 +24,7 @@ adjusted R-squared, and F-statistics, and returns a comprehensive summary of the
 }
 \examples{
 data(iris)
-model <- fitLinearModel(Petal.Length ~ Petal.Width + Sepal.Length, iris)
+model = fitLinearModel(Petal.Length ~ Petal.Width + Sepal.Length, iris)
 print(model)
 
 }

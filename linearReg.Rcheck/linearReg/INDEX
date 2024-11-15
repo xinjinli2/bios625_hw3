@@ -1,0 +1,7 @@
+fitLinearModel          Linear Regression Function
+getAdjustedRSquared     Return the adjusted R Squared value for the
+                        model
+getConfidenceInterval   Confidence Interval for Model Coefficients
+getFStatistic           Return the F statistics value for the model
+getRSquared             Return the R Squared value for the model
+model_summary           Model Summary

@@ -1,0 +1,6 @@
+fitLinearModel	fitLinearModel
+getAdjustedRSquared	getAdjustedRSquared
+getConfidenceInterval	getConfidenceInterval
+getFStatistic	getFStatistic
+getRSquared	getRSquared
+model_summary	model_summary

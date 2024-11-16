@@ -97,4 +97,6 @@ test_that("P-values for F-statistics are equal", {
 test_that("Model accuracy is reasonable", {
   R_squared <- getRSquared(custom_mod)
   expect_true(R_squared > 0.5)
+  adjusted_R_squared <- getAdjustedRSquared(custom_mod)
+  expect_true(adjusted_R_squared > 0.5)
 })

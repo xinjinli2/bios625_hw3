@@ -56,8 +56,8 @@ Here is an example that shows how to view help documents
 ```
 
 ## Author
-Cindy Li
-Email: xinjinli@umich.edu
+* Cindy Li
+* Email: xinjinli@umich.edu
 
 
 

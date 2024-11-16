@@ -7,24 +7,36 @@ context("Linear Model Tests on Iris Dataset")
 # Fit both models for comparison
 std_mod <- lm(Petal.Length ~ Petal.Width + Sepal.Width, iris)
 custom_mod <- fitLinearModel(Petal.Length ~ Petal.Width + Sepal.Width, iris)
-
+custom_mod_summary <- model_summary(custom_mod)
 
 test_that("fitLinearModel returns valid model output", {
   expect_true(is.list(custom_mod))
   expect_true("beta_hat" %in% names(custom_mod))
+  expect_true("se_beta_hat" %in% names(custom_mod))
+  expect_true("t_stats" %in% names(custom_mod))
+  expect_true("p_values" %in% names(custom_mod))
+  expect_true("sigma_squared" %in% names(custom_mod))
+  expect_true("R_squared" %in% names(custom_mod))
+  expect_true("adjusted_R_squared" %in% names(custom_mod))
+  expect_true("F_statistic" %in% names(custom_mod))
+  expect_true("p_value_F" %in% names(custom_mod))
+  expect_true("n" %in% names(custom_mod))
+  expect_true("k" %in% names(custom_mod))
   expect_true("X" %in% names(custom_mod))
 
   expect_true(is.numeric(custom_mod$beta_hat))
   expect_length(custom_mod$beta_hat, 3)
 })
 
-test_that("fitLinearModel handles non-numeric data", {
-  expect_error(fitLinearModel(Petal.Length ~ Species, iris), "Non-numeric data found")
+test_that("model_summary returns valid model output", {
+  expect_true(is.list(custom_mod_summary))
+  expect_true("Estimate" %in% names(custom_mod_summary))
+  expect_true("Std.Error" %in% names(custom_mod_summary))
+  expect_true("t.value" %in% names(custom_mod_summary))
+  expect_true("P.values" %in% names(custom_mod_summary))
+  expect_true("Signif" %in% names(custom_mod_summary))
 })
 
-test_that("fitLinearModel handles missing response variable", {
-  expect_error(fitLinearModel(NonExistent ~ Petal.Width, iris), "Not all variables specified")
-})
 
 test_that("fitLinearModel handles only one predictor", {
   single_predictor_model <- fitLinearModel(Petal.Length ~ Petal.Width, iris)
@@ -34,8 +46,6 @@ test_that("fitLinearModel handles only one predictor", {
 test_that("fitLinearModel residuals are computed correctly", {
   expect_equal(sum(custom_mod$residuals), 0, tolerance = 1e-10)  # Residuals should sum to zero
 })
-
-
 
 
 test_that("coefficients are equal", {

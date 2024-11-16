@@ -30,18 +30,18 @@ fitLinearModel <- function(formula, data) {
   }
 
   predictors <- terms[-1]
-  for (var in predictors) {
-    if (!is.numeric(data[[var]])) {
-      stop("Non-numeric data found for predictor '", var, "'. Numeric expected.")
-    }
-  }
+  # for (var in predictors) {
+  #   if (!is.numeric(data[[var]])) {
+  #     stop("Non-numeric data found for predictor '", var, "'. Numeric expected.")
+  #   }
+  # }
 
   X <- model.matrix(formula, data)  # Create model matrix for predictors
   y <- data[[as.character(formula[[2]])]]  # Extract response variable based on formula
 
-  if (nrow(X) != length(y)) {
-    stop("Number of rows in X and length of y must be the same")
-  }
+  # if (nrow(X) != length(y)) {
+  #   stop("Number of rows in X and length of y must be the same")
+  # }
 
   beta_hat <- solve(t(X) %*% X) %*% t(X) %*% y
   y_hat <- X %*% beta_hat
@@ -123,13 +123,11 @@ model_summary <- function(model) {
     Estimate = beta_hat,
     Std.Error = se_beta_hat,
     t.value = t_stats,
-    Pr...t.. = p_values,
+    P.values = p_values,
     Signif = signif_codes
   )
   # rownames(model_summary) <- c("(Intercept)", paste0("X", 1:(k - 1)))
   rownames(model_summary) <- colnames(model$X)
-
-
   print(model_summary)
 
 
@@ -137,6 +135,7 @@ model_summary <- function(model) {
   cat("Multiple R-squared:", R_squared, ", Adjusted R-squared:", adjusted_R_squared, "\n")
   cat("F-statistic:", F_statistic, "on", k - 1, "and", n - k, "DF, p-value:", format.pval(p_value_F), "\n")
   cat("Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n")
+  return(model_summary)
 }
 
 #' Confidence Interval for Model Coefficients

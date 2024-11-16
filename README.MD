@@ -17,6 +17,7 @@ install.packages("devtools")
 
 # Install linearReg from GitHub
 devtools::install_github("xinjinli2/linearReg")
+```
 
 
 ## Quick Start
@@ -42,7 +43,7 @@ adjusted_R_squared <- getAdjustedRSquared(model)
 
 # F-statistic and p-value
 F_statistic <- getFStatistic(model)
-
+```
 
 ## Example Data
 The examples above use the `iris` dataset. You can apply these functions to your own data by replacing `iris` with your data frame.
@@ -52,7 +53,7 @@ Here is an example that shows how to view help documents
 ```r
 ?fitLinearModel
 ?model_summary
-
+```
 
 ## Author
 Cindy Li

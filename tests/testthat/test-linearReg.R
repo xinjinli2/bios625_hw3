@@ -43,6 +43,10 @@ test_that("fitLinearModel handles only one predictor", {
   expect_length(single_predictor_model$beta_hat, 2)
 })
 
+test_that("fitLinearModel handles missing response variable", {
+  expect_error(fitLinearModel(NonExistent ~ Petal.Width, iris), "Not all variables specified")
+})
+
 test_that("fitLinearModel residuals are computed correctly", {
   expect_equal(sum(custom_mod$residuals), 0, tolerance = 1e-10)  # Residuals should sum to zero
 })

@@ -1,11 +1,11 @@
 # linearReg: Linear Regression Analysis Tools
 
-`linearReg` is an R package that provides tools for fitting and summarizing linear regression models using the ordinary least squares (OLS) method. The package is intuitive and practical, making it suitable for both educational and real-world data analysis.
-
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/xinjinli2/bios625_hw3/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/xinjinli2/bios625_hw3/actions/workflows/R-CMD-check.yaml)
 [![Codecov test coverage](https://codecov.io/gh/xinjinli2/bios625_hw3/graph/badge.svg)](https://app.codecov.io/gh/xinjinli2/bios625_hw3)
 <!-- badges: end -->
+
+`linearReg` is an R package that provides tools for fitting and summarizing linear regression models using the ordinary least squares (OLS) method. The package is intuitive and practical, making it suitable for both educational and real-world data analysis.
 
 ## Installation
 

@@ -54,7 +54,7 @@ fitLinearModel <- function(formula, data) {
   p_value_F <- pf(F_stats, df1 = ncol(X) - 1, df2 = nrow(X) - ncol(X), lower.tail = FALSE)
 
   return(list(
-    coefficients = beta_hat,
+    coef = beta_hat,
     se_beta_hat = se_beta_hat,
     t_stats = t_stats,
     p_values = p_values,

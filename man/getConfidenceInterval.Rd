@@ -15,7 +15,7 @@ getConfidenceInterval(model, level = 0.95)
 Returns a data frame with estimates of the coefficients and their lower and upper bounds.
 }
 \description{
-Calculates the confidence intervals for the regression coefficients at the specified confidence level.
+This function calculates the confidence intervals for the fitted linear regression model with specified confidence level.
 }
 \examples{
 data(iris)

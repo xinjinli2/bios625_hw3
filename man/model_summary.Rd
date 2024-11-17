@@ -13,9 +13,8 @@ model_summary(model)
 Prints the summary table
 }
 \description{
-Displays a summary of the linear regression model including estimates of the coefficients,
-standard errors, t-values, p-values for coefficients, significance codes, residual standard error,
-R-squared, adjusted R-squared, and F-statistic.
+The purpose of this function is to show a full summary of the linear regression model, including
+estimates of the coefficients, standard errors, t-values, and p-values of fitted coefficients.
 }
 \examples{
 data(iris)

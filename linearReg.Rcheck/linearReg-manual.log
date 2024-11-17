@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.11.6)  15 NOV 2024 00:53
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.11.6)  17 NOV 2024 01:22
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -293,7 +293,7 @@ File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
 File: l3backend-pdftex.def 2024-05-08 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count302
 \l__pdf_internal_box=\box59
-) (/private/var/folders/2x/7qv0s52j78qgnfcjcn6x0n_r0000gn/T/RtmpLDOo4v/Rd2pdfba9738876f79/Rd2.aux)
+) (/private/var/folders/2x/7qv0s52j78qgnfcjcn6x0n_r0000gn/T/Rtmp2t5gge/Rd2pdf118382cab6041/Rd2.aux)
 \openout1 = `Rd2.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 8.
@@ -315,7 +315,7 @@ LaTeX Font Info:    ... okay on input line 8.
 LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 8.
 LaTeX Font Info:    ... okay on input line 8.
 Package hyperref Info: Link coloring ON on input line 8.
- (/private/var/folders/2x/7qv0s52j78qgnfcjcn6x0n_r0000gn/T/RtmpLDOo4v/Rd2pdfba9738876f79/Rd2.out) (/private/var/folders/2x/7qv0s52j78qgnfcjcn6x0n_r0000gn/T/RtmpLDOo4v/Rd2pdfba9738876f79/Rd2.out)
+ (/private/var/folders/2x/7qv0s52j78qgnfcjcn6x0n_r0000gn/T/Rtmp2t5gge/Rd2pdf118382cab6041/Rd2.out) (/private/var/folders/2x/7qv0s52j78qgnfcjcn6x0n_r0000gn/T/Rtmp2t5gge/Rd2pdf118382cab6041/Rd2.out)
 \@outlinefile=\write4
 \openout4 = `Rd2.out'.
 
@@ -325,10 +325,10 @@ File: t1zi4.fd 2018/01/14 T1/zi4 (Inconsolata)
 )
 LaTeX Font Info:    Font shape `T1/zi4/m/n' will be
 (Font)              scaled to size 10.0pt on input line 22.
-LaTeX Font Info:    Trying to load font information for T1+phv on input line 38.
+LaTeX Font Info:    Trying to load font information for T1+phv on input line 35.
  (/Users/xinjinli/Library/TinyTeX/texmf-dist/tex/latex/psnfss/t1phv.fd
 File: t1phv.fd 2020/03/25 scalable font definitions for T1/phv.
-) (/private/var/folders/2x/7qv0s52j78qgnfcjcn6x0n_r0000gn/T/RtmpLDOo4v/Rd2pdfba9738876f79/Rd2.toc
+) (/private/var/folders/2x/7qv0s52j78qgnfcjcn6x0n_r0000gn/T/Rtmp2t5gge/Rd2pdf118382cab6041/Rd2.toc
 LaTeX Font Info:    Trying to load font information for U+msa on input line 1.
  (/Users/xinjinli/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
@@ -341,22 +341,13 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 \openout5 = `Rd2.toc'.
 
 
-Overfull \hbox (3.34589pt too wide) in paragraph at lines 43--46
-\T1/ptm/m/n/10 func-tion cal-cu-lates co-ef-fi-cients, resid-u-als, var-i-ous statis-tics in-clud-ing R-squared, ad-justed R-squared,
- []
-
-
 
 [1
 
 
 {/Users/xinjinli/Library/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/Users/xinjinli/Library/TinyTeX/texmf-dist/fonts/enc/dvips/base/8r.enc}{/Users/xinjinli/Library/TinyTeX/texmf-dist/fonts/enc/dvips/inconsolata/i4-t1-0.enc}]
-Overfull \hbox (1.27547pt too wide) in paragraph at lines 64--67
-[]\T1/ptm/m/n/10 A list con-tain-ing model co-ef-fi-cients, stan-dard er-rors, t-statistics, p-values, sigma squared, R-squared,
- []
-
 LaTeX Font Info:    Font shape `T1/zi4/m/n' will be
-(Font)              scaled to size 9.0pt on input line 70.
+(Font)              scaled to size 9.0pt on input line 65.
 
 
 [2]
@@ -367,7 +358,7 @@ LaTeX Font Info:    Font shape `T1/zi4/m/n' will be
 No file Rd2.ind.
 
 
-[5] (/private/var/folders/2x/7qv0s52j78qgnfcjcn6x0n_r0000gn/T/RtmpLDOo4v/Rd2pdfba9738876f79/Rd2.aux)
+[5] (/private/var/folders/2x/7qv0s52j78qgnfcjcn6x0n_r0000gn/T/Rtmp2t5gge/Rd2pdf118382cab6041/Rd2.aux)
  ***********
 LaTeX2e <2024-11-01>
 L3 programming layer <2024-11-02>
@@ -377,14 +368,14 @@ Package rerunfilecheck Info: File `Rd2.out' has not changed.
  ) 
 Here is how much of TeX's memory you used:
  10407 strings out of 475322
- 159364 string characters out of 5769217
+ 159375 string characters out of 5769217
  550687 words of memory out of 5000000
  33046 multiletter control sequences out of 15000+600000
  592910 words of font info for 76 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  92i,5n,95p,262b,735s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </Users/xinjinli/Library/TinyTeX/texmf-dist/fonts/type1/public/inconsolata/Inconsolata-zi4r.pfb></Users/xinjinli/Library/TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></Users/xinjinli/Library/TinyTeX/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></Users/xinjinli/Library/TinyTeX/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></Users/xinjinli/Library/TinyTeX/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></Users/xinjinli/Library/TinyTeX/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Rd2.pdf (5 pages, 81561 bytes).
+Output written on Rd2.pdf (5 pages, 81133 bytes).
 PDF statistics:
  142 PDF objects out of 1000 (max. 8388607)
  121 compressed objects within 2 object streams

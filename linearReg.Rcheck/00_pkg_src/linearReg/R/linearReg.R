@@ -1,18 +1,16 @@
 #' Linear Regression Function
 #'
-#' Performs linear regression on the provided dataset using the ordinary least squares method.
-#' The function calculates coefficients, residuals, various statistics including R-squared,
-#' adjusted R-squared, and F-statistics, and returns a comprehensive summary of the model.
+#' This function performs linear regression on input dataset using the ordinary least squares method.
+#' It calculates beta coefficients, standard errors of each coefficient, mean squared error (MSE),
+#' and returns various statistics, including R-squared, adjusted R-squared, and F statistics.
 #'
-#' @param formula An object of class "formula" (or one that can be coerced to that class):
-#'   a symbolic description of the model to be fitted.
+#' @param formula A formula describing the model to be fitted.
 #' @param data A data.frame that contains the variables in the model.
 #'
-#' @return A list containing model coefficients, standard errors, t-statistics, p-values,
-#' sigma squared, R-squared, adjusted R-squared, F-statistic, p-value of the F-statistic,
-#' number of observations, and number of predictors.
+#' @return A list containing model coefficients, standard errors, MSE, R-squared, adjusted R-squared,
+#' F-statistic, p-value of the F-statistic, number of observations, and number of predictors, and fitted values.
 #'
-#' @importFrom stats model.matrix pt qt pf
+#' @importFrom stats model.matrix pt pf qt
 #'
 #' @examples
 #' data(iris)
@@ -22,69 +20,62 @@
 #' @export
 fitLinearModel <- function(formula, data) {
 
-  terms <- all.vars(formula)
-
-  # Check if all variables in formula are presented in the data
-  if (!all(terms %in% names(data))) {
-    stop("Not all variables specified in the formula are present in the dataset.")
+  all_x <- all.vars(formula)
+  if (!all(all_x %in% names(data))) {
+    stop("Undefined variables in the model formula.")
   }
 
-  predictors <- terms[-1]
-  for (var in predictors) {
-    if (!is.numeric(data[[var]])) {
-      stop("Non-numeric data found for predictor '", var, "'. Numeric expected.")
-    }
-  }
-
-  X <- model.matrix(formula, data)  # Create model matrix for predictors
-  y <- data[[as.character(formula[[2]])]]  # Extract response variable based on formula
-
-  if (nrow(X) != length(y)) {
-    stop("Number of rows in X and length of y must be the same")
-  }
+  X <- model.matrix(formula, data)
+  y <- data[[as.character(formula[[2]])]]
 
   beta_hat <- solve(t(X) %*% X) %*% t(X) %*% y
-  y_hat <- X %*% beta_hat
-  residuals <- y - y_hat
-  RSS <- sum(residuals^2)
-  TSS <- sum((y - mean(y))^2)
-  ESS <- TSS - RSS
+  beta_hat <- as.numeric(beta_hat)  # Convert beta_hat to a numeric vector
+  names(beta_hat) <- colnames(X)
 
-  R_squared <- ESS / TSS
-  adjusted_R_squared <- 1 - (1 - R_squared) * ((nrow(X) - 1) / (nrow(X) - ncol(X) - 1))
+  fitted_values <- X %*% beta_hat
+  residuals <- y - fitted_values
 
-  sigma_squared <- RSS / (nrow(X) - ncol(X))
-  var_beta_hat <- sigma_squared * solve(t(X) %*% X)
-  se_beta_hat <- sqrt(diag(var_beta_hat))
+  n <- nrow(X)
+  p <- ncol(X)
+
+  SSE <- sum(residuals^2)
+  MSE <- SSE / (n - p)
+
+  SSY <- sum((y - mean(y))^2)
+
+  R2 <- 1 - SSE / SSY
+  adjusted_R2 <- 1 - (1 - R2) * ((n - 1) / (n - p))
+
+  inverse_X_trans_X <- solve(t(X) %*% X)
+  se_beta_hat <- sqrt(diag(inverse_X_trans_X) * MSE)
 
   t_stats <- beta_hat / se_beta_hat
-  p_values <- 2 * pt(-abs(t_stats), df = nrow(X) - ncol(X))
+  p_values <- 2 * pt(-abs(t_stats), df = n - p)
 
-  F_statistic <- (ESS / (ncol(X) - 1)) / (RSS / (nrow(X) - ncol(X)))
-  p_value_F <- pf(F_statistic, df1 = ncol(X) - 1, df2 = nrow(X) - ncol(X), lower.tail = FALSE)
+  # F-statistic
+  F_stat <- ((SSY - SSE) / (p - 1)) / (SSE / (n - p))
+  p_value_F <- pf(F_stat, df1 = p - 1, df2 = n - p, lower.tail = FALSE)
 
   return(list(
-    beta_hat = beta_hat,
-    se_beta_hat = se_beta_hat,
-    t_stats = t_stats,
+    coefficients = beta_hat,
+    SE_beta_hat = se_beta_hat,
+    t_values = t_stats,
     p_values = p_values,
-    sigma_squared = sigma_squared,
-    R_squared = R_squared,
-    adjusted_R_squared = adjusted_R_squared,
-    F_statistic = F_statistic,
-    p_value_F = p_value_F,
-    n = nrow(X),
-    k = ncol(X),
-    X = X
+    fitted.values = fitted_values,
+    residuals = residuals,
+    MSE = MSE,
+    R_squared = R2,
+    adjusted_R_squared = adjusted_R2,
+    F_statistic = F_stat,
+    df1 = p - 1,
+    df2 = n - p
   ))
 }
 
-
 #' Model Summary
 #'
-#' Displays a summary of the linear regression model including estimates of the coefficients,
-#' standard errors, t-values, p-values for coefficients, significance codes, residual standard error,
-#' R-squared, adjusted R-squared, and F-statistic.
+#' The purpose of this function is to show a full summary of the linear regression model, including
+#' estimates of the coefficients, standard errors, t-values, and p-values of fitted coefficients.
 #'
 #' @param model The model list object returned by `fitLinearModel()`.
 #'
@@ -98,18 +89,16 @@ fitLinearModel <- function(formula, data) {
 #' @export
 model_summary <- function(model) {
 
-  beta_hat <- model$beta_hat
-  se_beta_hat <- model$se_beta_hat
-  t_stats <- model$t_stats
+  coefficients <- model$coefficients
+  std_errors <- model$SE_beta_hat
+  t_values <- model$t_values
   p_values <- model$p_values
-  sigma_squared <- model$sigma_squared
-  R_squared <- model$R_squared
-  adjusted_R_squared <- model$adjusted_R_squared
+  mse <- model$MSE
+  R2 <- model$R_squared
+  adjusted_R2 <- model$adjusted_R_squared
   F_statistic <- model$F_statistic
-  p_value_F <- model$p_value_F
-  n <- model$n
-  k <- model$k
-
+  df1 <- model$df1
+  df2 <- model$df2
 
   signif_codes <- ifelse(
     p_values < 0.001, "***",
@@ -118,30 +107,30 @@ model_summary <- function(model) {
                   ifelse(p_values < 0.1, ".", " ")))
   )
 
-
-  model_summary <- data.frame(
-    Estimate = beta_hat,
-    Std.Error = se_beta_hat,
-    t.value = t_stats,
-    Pr...t.. = p_values,
+  summary_table <- data.frame(
+    Estimate = coefficients,
+    Std.Error = std_errors,
+    t.values = t_values,
+    P.values = p_values,
     Signif = signif_codes
   )
-  # rownames(model_summary) <- c("(Intercept)", paste0("X", 1:(k - 1)))
-  rownames(model_summary) <- colnames(model$X)
 
+  rownames(summary_table) <- colnames(model$X)
+  # print(summary_table)
 
-  print(model_summary)
-
-
-  cat("\nResidual standard error:", sqrt(sigma_squared), "on", n - k, "degrees of freedom\n")
-  cat("Multiple R-squared:", R_squared, ", Adjusted R-squared:", adjusted_R_squared, "\n")
-  cat("F-statistic:", F_statistic, "on", k - 1, "and", n - k, "DF, p-value:", format.pval(p_value_F), "\n")
+  cat("\nResidual standard error:", sqrt(mse), "on", df2, "degrees of freedom\n")
+  cat("Multiple R-squared:", R2, ", Adjusted R-squared:", adjusted_R2, "\n")
+  cat("F-statistic:", F_statistic, "on", df1, "and", df2, "DF, p-value:", format.pval(model$p_value_F), "\n")
   cat("Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n")
+
+  return(summary_table)
 }
+
+
 
 #' Confidence Interval for Model Coefficients
 #'
-#' Calculates the confidence intervals for the regression coefficients at the specified confidence level.
+#' This function calculates the confidence intervals for the fitted linear regression model with specified confidence level.
 #'
 #' @param model The model list object returned by `fitLinearModel`.
 #' @param level The confidence level for the interval (default is 0.95).
@@ -157,29 +146,33 @@ model_summary <- function(model) {
 #' @export
 getConfidenceInterval <- function(model, level = 0.95) {
 
-  beta_hat <- model$beta_hat
-  se_beta_hat <- model$se_beta_hat
-  n <- model$n
-  k <- model$k
+  beta_hat <- model$coefficients
+  se_beta_hat <- model$SE_beta_hat
+  n <- length(model$fitted.values)
+  k <- length(beta_hat)
 
 
   alpha <- 1 - level
   t_crit <- qt(1 - alpha / 2, df = n - k)
 
+  lwr_bd <- beta_hat - t_crit * se_beta_hat
+  upr_bd <- beta_hat + t_crit * se_beta_hat
 
-  lower_bound <- beta_hat - t_crit * se_beta_hat
-  upper_bound <- beta_hat + t_crit * se_beta_hat
-
+  lwr_col_name <- paste0(round((1 - level) / 2 * 100, 1), " %")
+  upr_col_name <- paste0(round((level + (1 - level) / 2) * 100, 1), " %")
 
   ci_summary <- data.frame(
-    Lower = lower_bound,
-    Upper = upper_bound
+    lwr_bd = lwr_bd,
+    upr_bd = upr_bd
   )
-  # rownames(ci_summary) <- c("(Intercept)", paste0("X", 1:(k - 1)))
-  rownames(ci_summary) <- colnames(model$X)
+
+  colnames(ci_summary) <- c(lwr_col_name, upr_col_name)
+
+  rownames(ci_summary) <- names(beta_hat)
 
   return(ci_summary)
 }
+
 
 #' Return the R Squared value for the model
 #'
@@ -229,6 +222,6 @@ getAdjustedRSquared <- function(model) {
 #'
 #' @export
 getFStatistic <- function(model) {
-  return(list(F_statistic = model$F_statistic, p_value = model$p_value_F))
+  return(model$F_statistic)
 }
 

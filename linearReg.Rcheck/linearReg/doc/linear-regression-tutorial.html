@@ -340,7 +340,12 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 
 
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(linearReg)</span></code></pre></div>
+<div id="loading-packages" class="section level1">
+<h1>Loading Packages</h1>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co"># install `linearReg` package if you haven&#39;t installed yet</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="co"># install.packages(&quot;linearReg&quot;)</span></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="fu">library</span>(linearReg)</span></code></pre></div>
+</div>
 <div id="function-explanations" class="section level1">
 <h1>Function Explanations</h1>
 <p>*For BIOSTAT625 homework 3, to fit a linear regression model, we use
@@ -366,27 +371,173 @@ squared: <code>getRSquared()</code> 3. adjusted R squared:
 <li>Fit linear regression model using <code>fitLinearModel()</code></li>
 </ol>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>my_mod <span class="ot">&lt;-</span> <span class="fu">fitLinearModel</span>(formula, iris)</span></code></pre></div>
+<ol style="list-style-type: lower-alpha">
+<li>Calculate estimated coefficients:</li>
+</ol>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>my_mod<span class="sc">$</span>coefficients</span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="co">#&gt; (Intercept) Petal.Width Sepal.Width </span></span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="co">#&gt;   2.2581635   2.1556105  -0.3550346</span></span></code></pre></div>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Calculate estimated coefficient standard errors:</li>
+</ol>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>my_mod<span class="sc">$</span>SE_beta_hat</span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="co">#&gt; (Intercept) Petal.Width Sepal.Width </span></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="co">#&gt;  0.31351892  0.05282854  0.09238591</span></span></code></pre></div>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Calculate mean squared error (sigma squared)</li>
+</ol>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>my_mod<span class="sc">$</span>MSE</span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="co">#&gt; [1] 0.2092175</span></span></code></pre></div>
+<ol start="4" style="list-style-type: lower-alpha">
+<li>Calculated R squared</li>
+</ol>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>my_mod<span class="sc">$</span>R_squared</span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="co">#&gt; [1] 0.9337642</span></span></code></pre></div>
+<ol start="5" style="list-style-type: lower-alpha">
+<li>Calculated adjusted R squared</li>
+</ol>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>my_mod<span class="sc">$</span>adjusted_R_squared</span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="co">#&gt; [1] 0.932863</span></span></code></pre></div>
+<ol start="6" style="list-style-type: lower-alpha">
+<li>Calculated F statistics</li>
+</ol>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a>my_mod<span class="sc">$</span>F_statistic</span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a><span class="co">#&gt; [1] 1036.172</span></span></code></pre></div>
 <ol start="2" style="list-style-type: decimal">
 <li>Display model summary</li>
 </ol>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="fu">model_summary</span>(my_mod)</span>
-<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="co">#&gt;               Estimate  Std.Error   t.value     Pr...t.. Signif</span></span>
-<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="co">#&gt; (Intercept)  2.2581635 0.31351892  7.202639 2.838822e-11    ***</span></span>
-<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="co">#&gt; Petal.Width  2.1556105 0.05282854 40.803902 4.566537e-82    ***</span></span>
-<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="co">#&gt; Sepal.Width -0.3550346 0.09238591 -3.842952 1.803720e-04    ***</span></span>
-<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="co">#&gt; Residual standard error: 0.457403 on 147 degrees of freedom</span></span>
-<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="co">#&gt; Multiple R-squared: 0.9337642 , Adjusted R-squared: 0.9324032 </span></span>
-<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="co">#&gt; F-statistic: 1036.172 on 2 and 147 DF, p-value: &lt; 2.22e-16 </span></span>
-<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a><span class="co">#&gt; Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="fu">model_summary</span>(my_mod)</span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a><span class="co">#&gt; Residual standard error: 0.457403 on 147 degrees of freedom</span></span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a><span class="co">#&gt; Multiple R-squared: 0.9337642 , Adjusted R-squared: 0.932863 </span></span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a><span class="co">#&gt; F-statistic: 1036.172 on 2 and 147 DF, p-value:  </span></span>
+<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a><span class="co">#&gt; Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
+<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a><span class="co">#&gt;     Estimate  Std.Error  t.values     P.values Signif</span></span>
+<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a><span class="co">#&gt; 1  2.2581635 0.31351892  7.202639 2.838822e-11    ***</span></span>
+<span id="cb10-9"><a href="#cb10-9" tabindex="-1"></a><span class="co">#&gt; 2  2.1556105 0.05282854 40.803902 4.566537e-82    ***</span></span>
+<span id="cb10-10"><a href="#cb10-10" tabindex="-1"></a><span class="co">#&gt; 3 -0.3550346 0.09238591 -3.842952 1.803720e-04    ***</span></span></code></pre></div>
 <ol start="3" style="list-style-type: decimal">
-<li>Display model Confidence Intervals</li>
+<li>Display model confidence intervals for each coefficient</li>
 </ol>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">getConfidenceInterval</span>(my_mod)</span>
-<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="co">#&gt;                  Lower      Upper</span></span>
-<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="co">#&gt; (Intercept)  1.6385770  2.8777500</span></span>
-<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="co">#&gt; Petal.Width  2.0512090  2.2600120</span></span>
-<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="co">#&gt; Sepal.Width -0.5376107 -0.1724585</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="fu">getConfidenceInterval</span>(my_mod)</span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a><span class="co">#&gt;                  2.5 %     97.5 %</span></span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a><span class="co">#&gt; (Intercept)  1.6385770  2.8777500</span></span>
+<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a><span class="co">#&gt; Petal.Width  2.0512090  2.2600120</span></span>
+<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a><span class="co">#&gt; Sepal.Width -0.5376107 -0.1724585</span></span></code></pre></div>
+<ol start="4" style="list-style-type: decimal">
+<li>Display R squared for fitted model</li>
+</ol>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="fu">getRSquared</span>(my_mod)</span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a><span class="co">#&gt; [1] 0.9337642</span></span></code></pre></div>
+<ol start="5" style="list-style-type: decimal">
+<li>Display adjusted R squared for fitted model</li>
+</ol>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="fu">getAdjustedRSquared</span>(my_mod)</span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a><span class="co">#&gt; [1] 0.932863</span></span></code></pre></div>
+<ol start="6" style="list-style-type: decimal">
+<li>Display F statistic and p-value for fitted model</li>
+</ol>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="fu">getFStatistic</span>(my_mod)</span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a><span class="co">#&gt; [1] 1036.172</span></span></code></pre></div>
+</div>
+<div id="compare-with-standard-lm-model" class="section level1">
+<h1>Compare with Standard lm() model</h1>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="co"># Fit models using both lm() and your custom function</span></span>
+<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a>lm_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(Petal.Length <span class="sc">~</span> Petal.Width <span class="sc">+</span> Sepal.Length, <span class="at">data =</span> iris)</span>
+<span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a>custom_model <span class="ot">&lt;-</span> <span class="fu">fitLinearModel</span>(Petal.Length <span class="sc">~</span> Petal.Width <span class="sc">+</span> Sepal.Length, <span class="at">data =</span> iris)</span>
+<span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" tabindex="-1"></a><span class="co"># Compare coefficients</span></span>
+<span id="cb15-6"><a href="#cb15-6" tabindex="-1"></a><span class="fu">all.equal</span>(<span class="fu">coef</span>(lm_model), custom_model<span class="sc">$</span>coefficients)</span>
+<span id="cb15-7"><a href="#cb15-7" tabindex="-1"></a><span class="co">#&gt; [1] TRUE</span></span>
+<span id="cb15-8"><a href="#cb15-8" tabindex="-1"></a></span>
+<span id="cb15-9"><a href="#cb15-9" tabindex="-1"></a><span class="co"># Compare standard errors</span></span>
+<span id="cb15-10"><a href="#cb15-10" tabindex="-1"></a><span class="fu">all.equal</span>(<span class="fu">summary</span>(lm_model)<span class="sc">$</span>coefficients[, <span class="st">&quot;Std. Error&quot;</span>], custom_model<span class="sc">$</span>SE_beta_hat)</span>
+<span id="cb15-11"><a href="#cb15-11" tabindex="-1"></a><span class="co">#&gt; [1] TRUE</span></span>
+<span id="cb15-12"><a href="#cb15-12" tabindex="-1"></a></span>
+<span id="cb15-13"><a href="#cb15-13" tabindex="-1"></a><span class="co"># Compare R-squared values</span></span>
+<span id="cb15-14"><a href="#cb15-14" tabindex="-1"></a><span class="fu">all.equal</span>(<span class="fu">summary</span>(lm_model)<span class="sc">$</span>r.squared, custom_model<span class="sc">$</span>R_squared)</span>
+<span id="cb15-15"><a href="#cb15-15" tabindex="-1"></a><span class="co">#&gt; [1] TRUE</span></span>
+<span id="cb15-16"><a href="#cb15-16" tabindex="-1"></a></span>
+<span id="cb15-17"><a href="#cb15-17" tabindex="-1"></a><span class="co"># Compare adjusted R-squared values</span></span>
+<span id="cb15-18"><a href="#cb15-18" tabindex="-1"></a><span class="fu">all.equal</span>(<span class="fu">summary</span>(lm_model)<span class="sc">$</span>adj.r.squared, custom_model<span class="sc">$</span>adjusted_R_squared)</span>
+<span id="cb15-19"><a href="#cb15-19" tabindex="-1"></a><span class="co">#&gt; [1] TRUE</span></span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="co"># Load necessary package</span></span>
+<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a><span class="fu">library</span>(bench)</span>
+<span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" tabindex="-1"></a><span class="co"># using bench::mark to compare the efficiency of customized and standard linear regression model fittings. </span></span>
+<span id="cb16-5"><a href="#cb16-5" tabindex="-1"></a>benchmark_model_fitting<span class="ot">&lt;-</span> bench<span class="sc">::</span><span class="fu">mark</span>(</span>
+<span id="cb16-6"><a href="#cb16-6" tabindex="-1"></a>  <span class="at">my_mod_coef =</span> <span class="fu">fitLinearModel</span>(Petal.Length <span class="sc">~</span> Petal.Width <span class="sc">+</span> Sepal.Width, iris)<span class="sc">$</span>coefficients,</span>
+<span id="cb16-7"><a href="#cb16-7" tabindex="-1"></a>  <span class="at">lm_model_coef =</span> <span class="fu">coef</span>(<span class="fu">lm</span>(Petal.Length <span class="sc">~</span> Petal.Width <span class="sc">+</span> Sepal.Width, <span class="at">data =</span> iris)),</span>
+<span id="cb16-8"><a href="#cb16-8" tabindex="-1"></a>  <span class="at">iterations =</span> <span class="dv">100</span></span>
+<span id="cb16-9"><a href="#cb16-9" tabindex="-1"></a>)</span>
+<span id="cb16-10"><a href="#cb16-10" tabindex="-1"></a></span>
+<span id="cb16-11"><a href="#cb16-11" tabindex="-1"></a><span class="fu">print</span>(benchmark_model_fitting)</span>
+<span id="cb16-12"><a href="#cb16-12" tabindex="-1"></a><span class="co">#&gt; # A tibble: 2 × 13</span></span>
+<span id="cb16-13"><a href="#cb16-13" tabindex="-1"></a><span class="co">#&gt;   expression      min median `itr/sec` mem_alloc `gc/sec` n_itr  n_gc total_time</span></span>
+<span id="cb16-14"><a href="#cb16-14" tabindex="-1"></a><span class="co">#&gt;   &lt;bch:expr&gt;    &lt;bch&gt; &lt;bch:&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt;   &lt;bch:tm&gt;</span></span>
+<span id="cb16-15"><a href="#cb16-15" tabindex="-1"></a><span class="co">#&gt; 1 my_mod_coef   304µs  339µs     2477.    43.5KB     25.0    99     1       40ms</span></span>
+<span id="cb16-16"><a href="#cb16-16" tabindex="-1"></a><span class="co">#&gt; 2 lm_model_coef 391µs  442µs     1950.    35.2KB     19.7    99     1     50.8ms</span></span>
+<span id="cb16-17"><a href="#cb16-17" tabindex="-1"></a><span class="co">#&gt; # ℹ 4 more variables: result &lt;list&gt;, memory &lt;list&gt;, time &lt;list&gt;, gc &lt;list&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="co"># benchmark_ci &lt;- bench::mark(</span></span>
+<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a><span class="co">#   my_mod_ci = as.numeric(unlist(getConfidenceInterval(my_mod))),</span></span>
+<span id="cb17-3"><a href="#cb17-3" tabindex="-1"></a><span class="co">#   lm_model_ci = as.vector(confint(lm_model)),</span></span>
+<span id="cb17-4"><a href="#cb17-4" tabindex="-1"></a><span class="co">#   iterations = 100</span></span>
+<span id="cb17-5"><a href="#cb17-5" tabindex="-1"></a><span class="co"># )</span></span>
+<span id="cb17-6"><a href="#cb17-6" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb17-7"><a href="#cb17-7" tabindex="-1"></a><span class="co"># print(benchmark_ci)</span></span>
+<span id="cb17-8"><a href="#cb17-8" tabindex="-1"></a>benchmark_ci <span class="ot">&lt;-</span> bench<span class="sc">::</span><span class="fu">mark</span>(</span>
+<span id="cb17-9"><a href="#cb17-9" tabindex="-1"></a>  <span class="at">my_mod_ci =</span> { <span class="fu">getConfidenceInterval</span>(my_mod); <span class="cn">NULL</span> }, </span>
+<span id="cb17-10"><a href="#cb17-10" tabindex="-1"></a>  <span class="at">lm_model_ci =</span> { <span class="fu">confint</span>(lm_model); <span class="cn">NULL</span> },            </span>
+<span id="cb17-11"><a href="#cb17-11" tabindex="-1"></a>)</span>
+<span id="cb17-12"><a href="#cb17-12" tabindex="-1"></a></span>
+<span id="cb17-13"><a href="#cb17-13" tabindex="-1"></a><span class="co"># Print the benchmark results</span></span>
+<span id="cb17-14"><a href="#cb17-14" tabindex="-1"></a><span class="fu">print</span>(benchmark_ci)</span>
+<span id="cb17-15"><a href="#cb17-15" tabindex="-1"></a><span class="co">#&gt; # A tibble: 2 × 13</span></span>
+<span id="cb17-16"><a href="#cb17-16" tabindex="-1"></a><span class="co">#&gt;   expression      min median `itr/sec` mem_alloc `gc/sec` n_itr  n_gc total_time</span></span>
+<span id="cb17-17"><a href="#cb17-17" tabindex="-1"></a><span class="co">#&gt;   &lt;bch:expr&gt;  &lt;bch:t&gt; &lt;bch:&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt;   &lt;bch:tm&gt;</span></span>
+<span id="cb17-18"><a href="#cb17-18" tabindex="-1"></a><span class="co">#&gt; 1 my_mod_ci     137µs  141µs     6762.        0B     21.2  3185    10      471ms</span></span>
+<span id="cb17-19"><a href="#cb17-19" tabindex="-1"></a><span class="co">#&gt; 2 lm_model_ci   120µs  123µs     7305.      84KB     18.8  3503     9      480ms</span></span>
+<span id="cb17-20"><a href="#cb17-20" tabindex="-1"></a><span class="co">#&gt; # ℹ 4 more variables: result &lt;list&gt;, memory &lt;list&gt;, time &lt;list&gt;, gc &lt;list&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a>benchmark_r_squared <span class="ot">&lt;-</span> bench<span class="sc">::</span><span class="fu">mark</span>(</span>
+<span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a>  <span class="at">my_mod_r2 =</span> { my_mod<span class="sc">$</span>R_squared; <span class="cn">NULL</span> },</span>
+<span id="cb18-3"><a href="#cb18-3" tabindex="-1"></a>  <span class="at">lm_model_r2 =</span> { <span class="fu">summary</span>(lm_model)<span class="sc">$</span>r.squared; <span class="cn">NULL</span> },</span>
+<span id="cb18-4"><a href="#cb18-4" tabindex="-1"></a>  <span class="at">iterations =</span> <span class="dv">100</span></span>
+<span id="cb18-5"><a href="#cb18-5" tabindex="-1"></a>)</span>
+<span id="cb18-6"><a href="#cb18-6" tabindex="-1"></a></span>
+<span id="cb18-7"><a href="#cb18-7" tabindex="-1"></a><span class="fu">print</span>(benchmark_r_squared)</span>
+<span id="cb18-8"><a href="#cb18-8" tabindex="-1"></a><span class="co">#&gt; # A tibble: 2 × 13</span></span>
+<span id="cb18-9"><a href="#cb18-9" tabindex="-1"></a><span class="co">#&gt;   expression      min median `itr/sec` mem_alloc `gc/sec` n_itr  n_gc total_time</span></span>
+<span id="cb18-10"><a href="#cb18-10" tabindex="-1"></a><span class="co">#&gt;   &lt;bch:expr&gt;  &lt;bch:t&gt; &lt;bch:&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt;   &lt;bch:tm&gt;</span></span>
+<span id="cb18-11"><a href="#cb18-11" tabindex="-1"></a><span class="co">#&gt; 1 my_mod_r2     328ns  369ns  2686004.        0B        0   100     0     37.2µs</span></span>
+<span id="cb18-12"><a href="#cb18-12" tabindex="-1"></a><span class="co">#&gt; 2 lm_model_r2  84.3µs  129µs     7176.    4.88KB        0   100     0     13.9ms</span></span>
+<span id="cb18-13"><a href="#cb18-13" tabindex="-1"></a><span class="co">#&gt; # ℹ 4 more variables: result &lt;list&gt;, memory &lt;list&gt;, time &lt;list&gt;, gc &lt;list&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a>benchmark_adjusted_r_squared <span class="ot">&lt;-</span> bench<span class="sc">::</span><span class="fu">mark</span>(</span>
+<span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a>  <span class="at">my_mod_adj_r2 =</span> { <span class="fu">getAdjustedRSquared</span>(my_mod); <span class="cn">NULL</span> },</span>
+<span id="cb19-3"><a href="#cb19-3" tabindex="-1"></a>  <span class="at">lm_model_adj_r2 =</span> { <span class="fu">summary</span>(lm_model)<span class="sc">$</span>adj.r.squared; <span class="cn">NULL</span> },</span>
+<span id="cb19-4"><a href="#cb19-4" tabindex="-1"></a>  <span class="at">iterations =</span> <span class="dv">100</span></span>
+<span id="cb19-5"><a href="#cb19-5" tabindex="-1"></a>)</span>
+<span id="cb19-6"><a href="#cb19-6" tabindex="-1"></a></span>
+<span id="cb19-7"><a href="#cb19-7" tabindex="-1"></a><span class="fu">print</span>(benchmark_adjusted_r_squared)</span>
+<span id="cb19-8"><a href="#cb19-8" tabindex="-1"></a><span class="co">#&gt; # A tibble: 2 × 13</span></span>
+<span id="cb19-9"><a href="#cb19-9" tabindex="-1"></a><span class="co">#&gt;   expression     min  median `itr/sec` mem_alloc `gc/sec` n_itr  n_gc total_time</span></span>
+<span id="cb19-10"><a href="#cb19-10" tabindex="-1"></a><span class="co">#&gt;   &lt;bch:expr&gt; &lt;bch:t&gt; &lt;bch:t&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt;   &lt;bch:tm&gt;</span></span>
+<span id="cb19-11"><a href="#cb19-11" tabindex="-1"></a><span class="co">#&gt; 1 my_mod_ad…   615ns   738ns    22684.        0B        0   100     0     4.41ms</span></span>
+<span id="cb19-12"><a href="#cb19-12" tabindex="-1"></a><span class="co">#&gt; 2 lm_model_…  82.5µs  83.8µs     9263.    4.88KB        0   100     0    10.79ms</span></span>
+<span id="cb19-13"><a href="#cb19-13" tabindex="-1"></a><span class="co">#&gt; # ℹ 4 more variables: result &lt;list&gt;, memory &lt;list&gt;, time &lt;list&gt;, gc &lt;list&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a><span class="co"># Benchmark F-statistics calculation</span></span>
+<span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a>benchmark_f_stat <span class="ot">&lt;-</span> bench<span class="sc">::</span><span class="fu">mark</span>(</span>
+<span id="cb20-3"><a href="#cb20-3" tabindex="-1"></a>  <span class="at">my_mod_f_stat =</span> { <span class="fu">getFStatistic</span>(my_mod); <span class="cn">NULL</span> },</span>
+<span id="cb20-4"><a href="#cb20-4" tabindex="-1"></a>  <span class="at">lm_model_f_stat =</span> { <span class="fu">as.numeric</span>(<span class="fu">summary</span>(lm_model)<span class="sc">$</span>fstatistic[<span class="dv">1</span>]); <span class="cn">NULL</span> },</span>
+<span id="cb20-5"><a href="#cb20-5" tabindex="-1"></a>  <span class="at">iterations =</span> <span class="dv">100</span></span>
+<span id="cb20-6"><a href="#cb20-6" tabindex="-1"></a>)</span>
+<span id="cb20-7"><a href="#cb20-7" tabindex="-1"></a></span>
+<span id="cb20-8"><a href="#cb20-8" tabindex="-1"></a><span class="fu">print</span>(benchmark_f_stat)</span>
+<span id="cb20-9"><a href="#cb20-9" tabindex="-1"></a><span class="co">#&gt; # A tibble: 2 × 13</span></span>
+<span id="cb20-10"><a href="#cb20-10" tabindex="-1"></a><span class="co">#&gt;   expression      min median `itr/sec` mem_alloc `gc/sec` n_itr  n_gc total_time</span></span>
+<span id="cb20-11"><a href="#cb20-11" tabindex="-1"></a><span class="co">#&gt;   &lt;bch:expr&gt;  &lt;bch:t&gt; &lt;bch:&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt;   &lt;bch:tm&gt;</span></span>
+<span id="cb20-12"><a href="#cb20-12" tabindex="-1"></a><span class="co">#&gt; 1 my_mod_f_s…   615ns  738ns   912449.        0B      0     100     0    109.6µs</span></span>
+<span id="cb20-13"><a href="#cb20-13" tabindex="-1"></a><span class="co">#&gt; 2 lm_model_f…  86.5µs  126µs     7521.    4.88KB     76.0    99     1     13.2ms</span></span>
+<span id="cb20-14"><a href="#cb20-14" tabindex="-1"></a><span class="co">#&gt; # ℹ 4 more variables: result &lt;list&gt;, memory &lt;list&gt;, time &lt;list&gt;, gc &lt;list&gt;</span></span></code></pre></div>
 </div>
 
 

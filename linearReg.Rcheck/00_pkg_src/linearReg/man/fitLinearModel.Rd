@@ -7,20 +7,18 @@
 fitLinearModel(formula, data)
 }
 \arguments{
-\item{formula}{An object of class "formula" (or one that can be coerced to that class):
-a symbolic description of the model to be fitted.}
+\item{formula}{A formula describing the model to be fitted.}
 
 \item{data}{A data.frame that contains the variables in the model.}
 }
 \value{
-A list containing model coefficients, standard errors, t-statistics, p-values,
-sigma squared, R-squared, adjusted R-squared, F-statistic, p-value of the F-statistic,
-number of observations, and number of predictors.
+A list containing model coefficients, standard errors, MSE, R-squared, adjusted R-squared,
+F-statistic, p-value of the F-statistic, number of observations, and number of predictors, and fitted values.
 }
 \description{
-Performs linear regression on the provided dataset using the ordinary least squares method.
-The function calculates coefficients, residuals, various statistics including R-squared,
-adjusted R-squared, and F-statistics, and returns a comprehensive summary of the model.
+This function performs linear regression on input dataset using the ordinary least squares method.
+It calculates beta coefficients, standard errors of each coefficient, mean squared error (MSE),
+and returns various statistics, including R-squared, adjusted R-squared, and F statistics.
 }
 \examples{
 data(iris)

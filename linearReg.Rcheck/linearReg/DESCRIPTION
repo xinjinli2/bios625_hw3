@@ -4,19 +4,16 @@ Title: Linear Regression Analysis Tools
 Version: 0.1.0
 Author: Cindy Li
 Maintainer: Cindy Li <xinjinli@umich.edu>
-Description: This package offers a tool for conducting linear regression analysis,
-    enabling users to fit models, summarize results, and compute key statistics including
-    confidence intervals for coefficients, R-squared, and F-statistics. Designed to be
-    user-friendly for both educational environments and practical data analysis tasks,
-    linearReg provides an accessible way to perform and interpret linear regression
-    with an emphasis on clarity and ease of use.
+Description: This package provides a tool for conducting linear regression analysis,
+    enabling users to fit models, summarize results, and calculate key statistics including
+    confidence intervals for coefficients, R-squared, and F-statistics.
 License: GPL-3
 Encoding: UTF-8
 RoxygenNote: 7.3.2
 Imports: stats
-Suggests: knitr, rmarkdown, testthat (>= 3.0.0)
+Suggests: knitr, rmarkdown, testthat (>= 3.0.0), bench
 Config/testthat/edition: 3
 VignetteBuilder: knitr
 NeedsCompilation: no
-Packaged: 2024-11-15 05:53:08 UTC; xinjinli
-Built: R 4.3.1; ; 2024-11-15 05:53:25 UTC; unix
+Packaged: 2024-11-17 06:20:04 UTC; xinjinli
+Built: R 4.3.1; ; 2024-11-17 06:22:35 UTC; unix

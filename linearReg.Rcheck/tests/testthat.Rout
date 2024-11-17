@@ -27,10 +27,16 @@ Type 'q()' to quit R.
 > library(linearReg)
 > 
 > test_check("linearReg")
-[ FAIL 0 | WARN 1 | SKIP 0 | PASS 10 ]
 
-[ FAIL 0 | WARN 1 | SKIP 0 | PASS 10 ]
+Residual standard error: 0.457403 on 147 degrees of freedom
+Multiple R-squared: 0.9337642 , Adjusted R-squared: 0.932863 
+F-statistic: 1036.172 on 2 and 147 DF, p-value:  
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+[ FAIL 0 | WARN 1 | SKIP 0 | PASS 31 ]
+
+[ FAIL 0 | WARN 1 | SKIP 0 | PASS 31 ]
 > 
 > proc.time()
    user  system elapsed 
-  0.426   0.066   0.541 
+  0.409   0.061   0.498 

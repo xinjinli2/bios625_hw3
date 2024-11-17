@@ -14,7 +14,10 @@ knitr::opts_chunk$set(
 )
 ```
 
+# Loading Packages
 ```{r setup}
+# install `linearReg` package if you haven't installed yet
+# install.packages("linearReg")
 library(linearReg)
 ```
 
@@ -42,16 +45,79 @@ formula = Petal.Length ~ Petal.Width + Sepal.Width
 ```{r}
 my_mod <- fitLinearModel(formula, iris)
 ```
+(a) Calculate estimated coefficients:
+```{r}
+my_mod$coefficients
+```
+(b) Calculate estimated coefficient standard errors:
+```{r}
+my_mod$se_beta_hat
+```
+
+(c) Calculate mean squared error (sigma squared)
+```{r}
+my_mod$sigma_squared
+```
+
+(d) Calculated R squared
+```{r}
+my_mod$R_squared
+```
+
+(e) Calculated adjusted R squared
+```{r}
+my_mod$adjusted_R_squared
+```
+
+(f) Calculated F statistics
+```{r}
+my_mod$F_statistic
+```
+
+(g) Calculated p value
+```{r}
+my_mod$p_value_F
+```
+
 
 2. Display model summary
 ```{r}
-model_summary(my_mod)
+# model_summary(my_mod)
 ```
 
-3. Display model Confidence Intervals
+3. Display model confidence intervals for each coefficient
 ```{r}
 getConfidenceInterval(my_mod)
 ```
 
+4. Display R squared for fitted model
+```{r}
+getRSquared(my_mod)
+```
 
+5. Display adjusted R squared for fitted model
+```{r}
+getAdjustedRSquared(my_mod)
+```
+
+6. Display F statistic and p-value for fitted model
+```{r}
+getFStatistic(my_mod)
+```
+# Compare with Standard lm() model
+```{r}
+# # Load necessary package
+# library(bench)
+# 
+# # Benchmark the performance of fitLinearModel() and lm()
+# benchmark_results <- bench::mark(
+#   lm_model = lm(Petal.Length ~ Petal.Width + Sepal.Length, data = iris),
+#   custom_model = fitLinearModel(Petal.Length ~ Petal.Width + Sepal.Length, data = iris),
+#   iterations = 100  # Number of iterations for more reliable results
+# )
+# 
+# # Print the results
+# print(benchmark_results)
+
+```
 

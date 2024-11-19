@@ -7,7 +7,7 @@ Maintainer: Cindy Li <xinjinli@umich.edu>
 Description: This package provides a tool for conducting linear regression analysis,
     enabling users to fit models, summarize results, and calculate key statistics including
     confidence intervals for coefficients, R-squared, and F-statistics.
-License: MIT + file LICENSE
+License: GPL-3
 Encoding: UTF-8
 RoxygenNote: 7.3.2
 Imports: stats

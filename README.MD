@@ -42,7 +42,7 @@ print(ci)
 R_squared <- getRSquared(model)
 adjusted_R_squared <- getAdjustedRSquared(model)
 
-# F-statistic and p-value
+# F-statistic
 F_statistic <- getFStatistic(model)
 ```
 

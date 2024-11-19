@@ -17,7 +17,7 @@ You can install the `linearReg` package from GitHub:
 install.packages("devtools")
 
 # Install linearReg from GitHub
-devtools::install_github("xinjinli2/linearReg")
+devtools::install_github("xinjinli2/bios625_hw3", force = TRUE)
 ```
 
 
